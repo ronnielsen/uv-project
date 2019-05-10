@@ -13,7 +13,6 @@ import {
 } from 'react-native';
 
 import { Icon } from 'expo';
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 import Colors from '../constants/Colors';
 import { MonoText } from '../components/StyledText';

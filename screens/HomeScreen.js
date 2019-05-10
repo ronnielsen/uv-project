@@ -12,7 +12,7 @@ import {
 import { Icon } from 'expo';
 
 import Colors from '../constants/Colors';
-import Header from '../components/Header';
+import Content from '../components/Content';
 import { MonoText } from '../components/StyledText';
 
 const width = Dimensions.get('window').width;
@@ -41,21 +41,12 @@ export default class HomeScreen extends React.Component {
     let scrollStyle = Object.assign({},styles.scrollContainer, { backgroundColor });
     return (
       <View style={styles.container}>
-        <ScrollView style={scrollStyle} contentContainerStyle={styles.contentContainer}>
-          <MonoText style={styles.mega}>
-            {number}
-          </MonoText>
-          <MonoText style={styles.status}>
-            {status}
-          </MonoText>
-          <MonoText style={styles.sub}>
-            {sub}
-          </MonoText>
+        <ScrollView style={scrollStyle} contentContainerStyle={styles.contentContainer} removeClippedSubviews={false}>
+          <Content number={number} status={status} sub={sub}/>
         </ScrollView>
       </View>
     );
   }
-
 }
 
 const styles = StyleSheet.create({
@@ -73,7 +64,8 @@ const styles = StyleSheet.create({
   mega: {
     fontSize: 160,
     color: Colors.white90,
-    height: 176,
+    lineHeight: 192,
+    height: 200,
     alignItems: 'center',
   },
   status: {
