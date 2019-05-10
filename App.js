@@ -1,12 +1,16 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View, Dimensions } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View, Dimensions, Image } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 import Colors from './constants/Colors';
 import Search from './components/Search';
 import { MonoText } from './components/StyledText';
 
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
+
 export default class App extends React.Component {
+
   state = {
     isLoadingComplete: false,
   };
@@ -22,9 +26,16 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <AppNavigator />
+        <View style={styles.page}>
+          <View style={styles.container}>
+            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+            <AppNavigator />
+            <Image
+              source={require('./assets/images/wave.png')}
+              style={styles.wave}
+              pointerEvents="none"
+            />
+          </View>
           <Search />
         </View>
       );
@@ -34,8 +45,7 @@ export default class App extends React.Component {
   _loadResourcesAsync = async () => {
     return Promise.all([
       Asset.loadAsync([
-        require('./assets/images/robot-dev.png'),
-        require('./assets/images/robot-prod.png'),
+        require('./assets/images/splash.png'),
       ]),
       Font.loadAsync({
         // This is the font that we are using for our tab bar
@@ -63,9 +73,19 @@ export default class App extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  page: {
+    flex: 1,
+  },
   container: {
     flex: 1,
-    backgroundColor: Colors.red,
+    backgroundColor: Colors.green,
     paddingBottom: 96
   },
+  wave: {
+    resizeMode: 'stretch',
+    height: height,
+    width: width,
+    position: 'absolute',
+    top: 0,
+  }
 });

@@ -7,11 +7,15 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Dimensions
 } from 'react-native';
 import { WebBrowser } from 'expo';
 
 import Colors from '../constants/Colors';
 import { MonoText } from '../components/StyledText';
+
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 
 export default class LinksScreen extends React.Component {
   static navigationOptions = {
@@ -19,8 +23,10 @@ export default class LinksScreen extends React.Component {
   };
 
   state = {
-    backgroundColor: Colors.red,
-    number: 1
+    backgroundColor: Colors.green,
+    number: 1,
+    status: 'Good',
+    sub: 'air quality, breathe freely',
   }
 
   onChangeBackground = () => {
@@ -28,7 +34,7 @@ export default class LinksScreen extends React.Component {
   }
 
   render() {
-    let { backgroundColor, number } = this.state;
+    let { backgroundColor, number, status, sub } = this.state;
 
     let scrollStyle = Object.assign({},styles.scrollContainer, { backgroundColor });
     return (
@@ -36,6 +42,12 @@ export default class LinksScreen extends React.Component {
         <ScrollView style={scrollStyle} contentContainerStyle={styles.contentContainer}>
           <MonoText style={styles.mega}>
             {number}
+          </MonoText>
+          <MonoText style={styles.status}>
+            {status}
+          </MonoText>
+          <MonoText style={styles.sub}>
+            {sub}
           </MonoText>
         </ScrollView>
       </View>
@@ -46,17 +58,29 @@ export default class LinksScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.red,
+    height: height,
+    width: width,
   },
   scrollContainer: {
     backgroundColor: 'blue',
   },
   contentContainer: {
-    paddingTop: 24,
     paddingHorizontal: 24,
   },
   mega: {
-    fontSize: 200,
-    color: 'rgba(255,255,255,.85)',
+    fontSize: 180,
+    height: 240,
+    color: Colors.white90,
+  },
+  status: {
+    fontSize: 48,
+    color: Colors.white90,
+    height: 80,
+    lineHeight: 80
+  },
+  sub: {
+    fontSize: 48,
+    color: Colors.black90,
+    lineHeight: 56,
   },
 });

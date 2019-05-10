@@ -9,6 +9,7 @@ import {
   View,
   TextInput,
   Dimensions,
+  Animated,
 } from 'react-native';
 
 import { Icon } from 'expo';
@@ -21,15 +22,27 @@ const width = Dimensions.get('window').width;
 
 export default class Search extends React.Component {
   state = {
-    text: 'San Jose, CA'
+    text: 'San Jose, CA',
+    searchHeight: 96,
   }
+
+  componentOnChange() {
+    Animated.timing(                  // Animate over time
+      this.state.searchHeight,            // The animated value to drive
+      {
+        toValue: 200,                   // Animate to opacity: 1 (opaque)
+        duration: 10000,              // Make it take a while
+      }
+    ).start();                        // Starts the animation
+  }
+
   render() {
     return (
-      <View style={styles.search}>
-        <View style={styles.searchRow}>
+      <View style={styles.search} >
+        <Animated.View style={styles.searchRow}>
           <GooglePlacesAutocomplete
-            placeholder="Search"
-            minLength={2} // minimum length of text to search
+            placeholder={this.state.text}
+            minLength={3} // minimum length of text to search
             autoFocus={false}
             returnKeyType={"search"}
             listViewDisplayed="true"
@@ -58,16 +71,19 @@ export default class Search extends React.Component {
               textInputContainer: {
                 backgroundColor: 'white',
                 borderTopWidth: 0,
-                borderBottomWidth:0
+                borderBottomWidth: 0,
+                height: 40,
               },
               textInput: {
                 marginLeft: 0,
                 marginRight: 0,
                 marginTop: 0,
                 height: 40,
+                backgroundColor: 'white',
                 color: Colors.black90,
                 fontSize: 20,
                 fontFamily: 'plex-sans',
+                paddingLeft: 0,
               },
             }}
             enablePoweredByContainer={false}
@@ -87,7 +103,7 @@ export default class Search extends React.Component {
               color={this.props.focused ? Colors.black90 : Colors.black50}
             />}
           />
-        </View>
+        </Animated.View>
       </View>
     );
   }
@@ -98,14 +114,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
-    marginTop: 16,
     overflow: 'hidden',
     width: width,
     position: 'absolute',
     bottom: 0,
   },
   searchRow: {
-    height: 'auto',
     backgroundColor: 'white',
     flexDirection: 'row',
     alignItems: 'center',
@@ -113,7 +127,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     height: 40,
-    margin: 8,
+    margin: 4,
     width: 40,
     alignItems: 'center',
     justifyContent: 'center',
