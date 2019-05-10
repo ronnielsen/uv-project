@@ -6,10 +6,13 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
+  Dimensions,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Colors, Layout } from '../../constants';
+const height = Layout.window.height;
+const width = Layout.window.width;
 
 class AirScreen extends React.Component {
   static navigationOptions = {
@@ -18,9 +21,9 @@ class AirScreen extends React.Component {
 
   getBackgroundColor = () => {
     let { air } = this.props.main;
-    if (air < 2) return 'blue';
-    if (air < 5) return 'green';
-    if (air < 8) return 'orange';
+    if (air < 2) return Colors.green;
+    if (air < 5) return Colors.yellow;
+    if (air < 8) return Colors.orange;
     return 'red';
   }
 
@@ -34,8 +37,9 @@ class AirScreen extends React.Component {
 
   getSub = () => {
     let { air } = this.props.main;
-    return "risk of sun exposure";
+    return "air qualuty";
   }
+
 
   render() {
     return (
@@ -61,8 +65,8 @@ class AirScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: Layout.window.height,
-    width: Layout.window.width,
+    height: height,
+    width: width,
   },
   scrollContainer: {
     backgroundColor: 'blue',
@@ -71,9 +75,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   mega: {
-    fontSize: 180,
-    height: 240,
+    fontSize: 160,
     color: Colors.white90,
+    lineHeight: 192,
+    height: 200,
+    alignItems: 'center',
   },
   status: {
     fontSize: 48,

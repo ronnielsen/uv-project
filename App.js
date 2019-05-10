@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View, Image } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View, Image, Dimensions } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
@@ -7,11 +7,16 @@ import { store, persistor } from './src/redux';
 import { Colors, Layout } from './src/constants';
 import AppNavigator from './src/components/navigators';
 import LocationForm from './src/components/forms/LocationForm';
+import Header from './src/components/elements/Header';
+
+const height = Layout.window.height;
+const width = Layout.window.width;
 
 export default class App extends React.Component {
 
   state = {
     isLoadingComplete: false,
+    backgroundColor: Colors.green,
   };
 
   renderLoading() {
@@ -25,6 +30,7 @@ export default class App extends React.Component {
   }
 
   render() {
+
     let isLoading = !this.state.isLoadingComplete && !this.props.skipLoadingScreen;
     return (
       <Provider store={store}>
@@ -33,6 +39,7 @@ export default class App extends React.Component {
             <View style={styles.page}>
               <View style={styles.container}>
                 {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+                <Header />
                 <AppNavigator />
                 <Image
                   source={require('./assets/images/wave.png')}

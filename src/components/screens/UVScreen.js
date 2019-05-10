@@ -6,10 +6,13 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
+  Dimensions,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { Colors, Layout } from '../../constants';
+const height = Layout.window.height;
+const width = Layout.window.width;
 
 class UVScreen extends React.Component {
   static navigationOptions = {
@@ -18,9 +21,9 @@ class UVScreen extends React.Component {
 
   getBackgroundColor = () => {
     let { uv } = this.props.main;
-    if (uv < 2) return 'blue';
-    if (uv < 5) return 'green';
-    if (uv < 8) return 'orange';
+    if (uv < 2) return Colors.green;
+    if (uv < 5) return Colors.yellow;
+    if (uv < 8) return Colors.orange;
     return 'red';
   }
 
@@ -62,8 +65,8 @@ class UVScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: Layout.window.height,
-    width: Layout.window.width,
+    height: height,
+    width: width,
   },
   scrollContainer: {
     backgroundColor: 'blue',
@@ -72,9 +75,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   mega: {
-    fontSize: 180,
-    height: 240,
+    fontSize: 160,
     color: Colors.white90,
+    lineHeight: 192,
+    height: 200,
+    alignItems: 'center',
   },
   status: {
     fontSize: 48,
