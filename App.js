@@ -1,13 +1,12 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View, Dimensions, Image } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View, Image } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
-import AppNavigator from './navigation/AppNavigator';
-import Colors from './constants/Colors';
-import Search from './components/Search';
-import { MonoText } from './components/StyledText';
-
-const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/lib/integration/react';
+import { store, persistor } from './src/redux';
+import { Colors, Layout } from './src/constants';
+import AppNavigator from './src/components/navigators';
+import LocationForm from './src/components/forms/LocationForm';
 
 export default class App extends React.Component {
 
@@ -15,31 +14,38 @@ export default class App extends React.Component {
     isLoadingComplete: false,
   };
 
+  renderLoading() {
+    return (
+      <AppLoading
+        startAsync={this._loadResourcesAsync}
+        onError={this._handleLoadingError}
+        onFinish={this._handleFinishLoading}
+      />
+    );
+  }
+
   render() {
-    if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
-      return (
-        <AppLoading
-          startAsync={this._loadResourcesAsync}
-          onError={this._handleLoadingError}
-          onFinish={this._handleFinishLoading}
-        />
-      );
-    } else {
-      return (
-        <View style={styles.page}>
-          <View style={styles.container}>
-            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-            <AppNavigator />
-            <Image
-              source={require('./assets/images/wave.png')}
-              style={styles.wave}
-              pointerEvents="none"
-            />
-          </View>
-          <Search />
-        </View>
-      );
-    }
+    let isLoading = !this.state.isLoadingComplete && !this.props.skipLoadingScreen;
+    return (
+      <Provider store={store}>
+        <PersistGate loading={this.renderLoading()} persistor={persistor}>
+          {isLoading ? this.renderLoading() : (
+            <View style={styles.page}>
+              <View style={styles.container}>
+                {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+                <AppNavigator />
+                <Image
+                  source={require('./assets/images/wave.png')}
+                  style={styles.wave}
+                  pointerEvents="none"
+                />
+              </View>
+              <LocationForm />
+            </View>
+          )}
+        </PersistGate>
+      </Provider>
+    );
   }
 
   _loadResourcesAsync = async () => {
@@ -83,8 +89,8 @@ const styles = StyleSheet.create({
   },
   wave: {
     resizeMode: 'stretch',
-    height: height,
-    width: width,
+    height: Layout.window.height,
+    width: Layout.window.width,
     position: 'absolute',
     top: 0,
   }

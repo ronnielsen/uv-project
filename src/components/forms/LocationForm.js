@@ -8,19 +8,15 @@ import {
   TouchableOpacity,
   View,
   TextInput,
-  Dimensions,
   Animated,
 } from 'react-native';
-
 import { Icon } from 'expo';
+import { connect } from 'react-redux';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { Colors, Layout } from '../../constants';
+import { MainActions } from '../../redux/actions';
 
-import Colors from '../constants/Colors';
-import { MonoText } from '../components/StyledText';
-
-const width = Dimensions.get('window').width;
-
-export default class Search extends React.Component {
+class LocationForm extends React.Component {
   state = {
     text: 'San Jose, CA',
     searchHeight: 96,
@@ -37,6 +33,7 @@ export default class Search extends React.Component {
   }
 
   render() {
+    let { setLocation } = this.props;
     return (
       <View style={styles.search} >
         <Animated.View style={styles.searchRow}>
@@ -51,7 +48,10 @@ export default class Search extends React.Component {
               row.description || row.formatted_address || row.name
             }
             onPress={(data, details = null) => {
-              this.props.handler(data.description)
+              // this.props.handler(data.description)
+              console.log(data);
+              console.log(details);
+              setLocation(data.description);
             }}
             getDefaultValue={() => {
               return ""; // text input default value
@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
     overflow: 'hidden',
-    width: width,
+    width: Layout.window.width,
     position: 'absolute',
     bottom: 0,
   },
@@ -133,3 +133,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+
+const mapStateToProps = (state) => {
+  let { location, uv, air } = state.main
+  return {
+    main: { location, uv, air }
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setLocation: (location) => dispatch(MainActions.setLocation(location)),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LocationForm)
