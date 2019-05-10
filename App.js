@@ -4,6 +4,7 @@ import { AppLoading, Asset, Font, Icon } from 'expo';
 import AppNavigator from './navigation/AppNavigator';
 import Colors from './constants/Colors';
 import Search from './components/Search';
+import Header from './components/Header';
 import { MonoText } from './components/StyledText';
 
 const width = Dimensions.get('window').width;
@@ -29,6 +30,7 @@ export default class App extends React.Component {
         <View style={styles.page}>
           <View style={styles.container}>
             {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+            <Header />
             <AppNavigator />
             <Image
               source={require('./assets/images/wave.png')}
