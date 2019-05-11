@@ -16,7 +16,6 @@ import { connect } from 'react-redux';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { Colors, Layout } from '../../constants';
 import { MainActions } from '../../redux/actions';
-import SwipeUpDown from 'react-native-swipe-up-down';
 
 class LocationForm extends React.Component {
   state = {
@@ -38,6 +37,7 @@ class LocationForm extends React.Component {
     let { setLocation } = this.props;
     return (
       <View style={styles.search} onPress={() => this.swipeUpDownRef.showFull()}>
+        <View style={styles.line}></View>
         <View style={styles.searchRow}>
           <GooglePlacesAutocomplete
             placeholder={this.state.text}
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 16,
     overflow: 'hidden',
     width: Layout.window.width,
-    marginTop: -4,
+    paddingTop: 8,
   },
   searchRow: {
     backgroundColor: 'white',
@@ -131,6 +131,15 @@ const styles = StyleSheet.create({
     width: 40,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  line: {
+    height: 4,
+    backgroundColor: 'rgba(0,0,0,.10)',
+    justifyContent: 'center',
+    width: 120,
+    borderRadius: 16,
+    marginBottom: 8,
+    alignSelf: 'center'
   },
 });
 

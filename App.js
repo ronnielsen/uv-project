@@ -8,7 +8,7 @@ import { store, persistor } from './src/redux';
 import { Colors, Layout } from './src/constants';
 import AppNavigator from './src/components/navigators';
 import LocationForm from './src/components/forms/LocationForm';
-import SwipeUpDown from 'react-native-swipe-up-down';
+import BottomDrawer from 'rn-bottom-drawer';
 
 export default class App extends React.Component {
 
@@ -34,6 +34,7 @@ export default class App extends React.Component {
         <PersistGate loading={this.renderLoading()} persistor={persistor}>
           {isLoading ? this.renderLoading() : (
             <SafeAreaView style={styles.page}>
+              <KeyboardAvoidingView style={styles.page}>
                 <View style={styles.container}>
                   {Platform.OS === 'ios' && <StatusBar barStyle="default" backgroundColor={'transparent'}/>}
                   <AppNavigator />
@@ -43,16 +44,18 @@ export default class App extends React.Component {
                     pointerEvents="none"
                   />
                 </View>
-                <SwipeUpDown
-                	itemMini={<LocationForm />}
-                	itemFull={<LocationForm />}
-                	onShowMini={() => console.log('mini')}
-                	onShowFull={() => console.log('full')}
-                	onMoveDown={() => console.log('down')}
-                	onMoveUp={() => console.log('up')}
-                	style={{ backgroundColor: 'white', padding: 0}} // style for swipe
-                  animation="easeInEaseOut"
-                />
+                <BottomDrawer
+                  containerHeight={360}
+                  startUp={false}
+                  downDisplay={268}
+                  shadow={false}
+                  >
+                  <LocationForm/>
+                </BottomDrawer>
+
+
+              </KeyboardAvoidingView>
+
             </SafeAreaView>
           )}
         </PersistGate>
