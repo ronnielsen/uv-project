@@ -21,18 +21,22 @@ class AirScreen extends React.Component {
 
   getBackgroundColor = () => {
     let { air } = this.props.main;
-    if (air < 2) return Colors.green;
-    if (air < 5) return Colors.yellow;
-    if (air < 8) return Colors.orange;
-    return 'red';
+    if (air < 50) return Colors.green;
+    if (air < 100) return Colors.yellow;
+    if (air < 150) return Colors.orange;
+    if (air < 200) return Colors.red;
+    if (air < 300) return Colors.purple;
+    return Colors.maroon;
   }
 
   getStatus = () => {
     let { air } = this.props.main;
-    if (air < 2) return 'Low';
-    if (air < 5) return 'Moderate';
-    if (air < 8) return 'Dangerous';
-    return 'Extreme';
+    if (air < 50) return 'Good';
+    if (air < 100) return 'Moderate';
+    if (air < 150) return 'Unhealthy if Sensitive';
+    if (air < 200) return 'Unhealthy';
+    if (air < 300) return 'Very Unhealthy';
+    return 'Hazardous';
   }
 
   getSub = () => {
@@ -84,13 +88,20 @@ const styles = StyleSheet.create({
   status: {
     fontSize: 48,
     color: Colors.white90,
-    height: 80,
-    lineHeight: 80
+    lineHeight: 64,
+    marginBottom: 16,
   },
   sub: {
     fontSize: 48,
     color: Colors.black90,
     lineHeight: 56,
+  },
+  wave: {
+    resizeMode: 'stretch',
+    height: Layout.window.height,
+    width: Layout.window.width,
+    position: 'absolute',
+    top: 0,
   },
 });
 

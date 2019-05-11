@@ -21,17 +21,19 @@ class UVScreen extends React.Component {
 
   getBackgroundColor = () => {
     let { uv } = this.props.main;
-    if (uv < 2) return Colors.green;
-    if (uv < 5) return Colors.yellow;
+    if (uv < 3) return Colors.green;
+    if (uv < 6) return Colors.yellow;
     if (uv < 8) return Colors.orange;
-    return 'red';
+    if (uv < 11) return Colors.red;
+    return Colors.purple;
   }
 
   getStatus = () => {
     let { uv } = this.props.main;
-    if (uv < 2) return 'Low';
-    if (uv < 5) return 'Moderate';
-    if (uv < 8) return 'Dangerous';
+    if (uv < 3) return 'Low';
+    if (uv < 6) return 'Moderate';
+    if (uv < 8) return 'High';
+    if (uv < 11) return 'Very High';
     return 'Extreme';
   }
 
@@ -84,14 +86,21 @@ const styles = StyleSheet.create({
   status: {
     fontSize: 48,
     color: Colors.white90,
-    height: 80,
-    lineHeight: 80
+    lineHeight: 64,
+    marginBottom: 16,
   },
   sub: {
     fontSize: 48,
     color: Colors.black90,
     lineHeight: 56,
   },
+  wave: {
+    resizeMode: 'stretch',
+    height: Layout.window.height,
+    width: Layout.window.width,
+    position: 'absolute',
+    top: 0,
+  }
 });
 
 const mapStateToProps = (state) => {

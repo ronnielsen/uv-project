@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View, Image, Dimensions } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View, Image, Dimensions, KeyboardAvoidingView } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import { Provider } from 'react-redux';
@@ -33,16 +33,16 @@ export default class App extends React.Component {
         <PersistGate loading={this.renderLoading()} persistor={persistor}>
           {isLoading ? this.renderLoading() : (
             <SafeAreaView style={styles.page}>
-              <View style={styles.container}>
-                {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-                <AppNavigator />
-                <Image
-                  source={require('./assets/images/wave.png')}
-                  style={styles.wave}
-                  pointerEvents="none"
-                />
-              </View>
-              <LocationForm />
+                <View style={styles.container}>
+                  {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+                  <AppNavigator />
+                  <Image
+                    source={require('./assets/images/wave.png')}
+                    style={styles.wave}
+                    pointerEvents="none"
+                  />
+                </View>
+                <LocationForm />
             </SafeAreaView>
           )}
         </PersistGate>

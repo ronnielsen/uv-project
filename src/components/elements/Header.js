@@ -44,11 +44,12 @@ const styles = StyleSheet.create({
     marginTop: 40,
     alignItems: 'center',
     paddingHorizontal: 24,
-    backgroundColor: 'rgba(0,0,0,0)'
+    backgroundColor: 'transparent',
   },
   label: {
     fontSize: 18,
     color: Colors.black50,
     flex: 1,
+    fontFamily: 'plex-serif-bold',
   },
 });
