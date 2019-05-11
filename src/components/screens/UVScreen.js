@@ -46,10 +46,15 @@ class UVScreen extends React.Component {
         <ScrollView
           style={styles.scrollContainer}
           contentContainerStyle={styles.contentContainer}>
-          <Content
-            title={this.props.main.uv}
-            status={this.getStatus()}
-            sub={this.getSub()} />
+            <Text style={[{ fontFamily: 'plex-serif-bold' }, styles.mega ]}>
+              {this.props.main.uv}
+            </Text>
+            <Text style={[{ fontFamily: 'plex-serif-bold' }, styles.status ]}>
+              {this.getStatus()}
+            </Text>
+            <Text style={[{ fontFamily: 'plex-serif-bold' }, styles.sub ]}>
+              {this.getSub()}
+            </Text>
         </ScrollView>
       </View>
     );
@@ -62,11 +67,30 @@ const styles = StyleSheet.create({
     position: 'absolute',
     height: Layout.window.height,
     width: Layout.window.width,
+    paddingTop: 100
   },
   scrollContainer: {
   },
   contentContainer: {
     paddingHorizontal: 24,
+  },
+  mega: {
+    fontSize: 160,
+    color: Colors.white90,
+    lineHeight: 192,
+    height: 200,
+    alignItems: 'center',
+  },
+  status: {
+    fontSize: 48,
+    color: Colors.white90,
+    height: 80,
+    lineHeight: 80
+  },
+  sub: {
+    fontSize: 48,
+    color: Colors.black90,
+    lineHeight: 56,
   },
 });
 
