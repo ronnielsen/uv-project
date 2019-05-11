@@ -1,5 +1,6 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View, Image, Dimensions } from 'react-native';
+import { SafeAreaView } from 'react-navigation';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
@@ -7,16 +8,11 @@ import { store, persistor } from './src/redux';
 import { Colors, Layout } from './src/constants';
 import AppNavigator from './src/components/navigators';
 import LocationForm from './src/components/forms/LocationForm';
-import Header from './src/components/elements/Header';
-
-const height = Layout.window.height;
-const width = Layout.window.width;
 
 export default class App extends React.Component {
 
   state = {
     isLoadingComplete: false,
-    backgroundColor: Colors.green,
   };
 
   renderLoading() {
@@ -36,10 +32,9 @@ export default class App extends React.Component {
       <Provider store={store}>
         <PersistGate loading={this.renderLoading()} persistor={persistor}>
           {isLoading ? this.renderLoading() : (
-            <View style={styles.page}>
+            <SafeAreaView style={styles.page}>
               <View style={styles.container}>
                 {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-                <Header />
                 <AppNavigator />
                 <Image
                   source={require('./assets/images/wave.png')}
@@ -48,7 +43,7 @@ export default class App extends React.Component {
                 />
               </View>
               <LocationForm />
-            </View>
+            </SafeAreaView>
           )}
         </PersistGate>
       </Provider>
@@ -91,8 +86,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: Colors.green,
-    paddingBottom: 96
   },
   wave: {
     resizeMode: 'stretch',

@@ -10,13 +10,13 @@ import {
   Dimensions,
 } from 'react-native';
 import { connect } from 'react-redux';
+import { Content, Header } from '../elements';
 import { Colors, Layout } from '../../constants';
-const height = Layout.window.height;
-const width = Layout.window.width;
 
 class UVScreen extends React.Component {
   static navigationOptions = {
-    header: null,
+    header: <Header label="UV Index" />,
+    headerTransparent: true
   };
 
   getBackgroundColor = () => {
@@ -42,19 +42,14 @@ class UVScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, { backgroundColor: this.getBackgroundColor() }]}>
         <ScrollView
-          style={[styles.scrollContainer, { backgroundColor: this.getBackgroundColor() }]}
+          style={styles.scrollContainer}
           contentContainerStyle={styles.contentContainer}>
-          <Text style={[{ fontFamily: 'plex-serif-bold' }, styles.mega ]}>
-            {this.props.main.uv}
-          </Text>
-          <Text style={[{ fontFamily: 'plex-serif-bold' }, styles.status ]}>
-            {this.getStatus()}
-          </Text>
-          <Text style={[{ fontFamily: 'plex-serif-bold' }, styles.sub ]}>
-            {this.getSub()}
-          </Text>
+          <Content
+            title={this.props.main.uv}
+            status={this.getStatus()}
+            sub={this.getSub()} />
         </ScrollView>
       </View>
     );
@@ -64,33 +59,14 @@ class UVScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    height: height,
-    width: width,
+    position: 'absolute',
+    height: Layout.window.height,
+    width: Layout.window.width,
   },
   scrollContainer: {
-    backgroundColor: 'blue',
   },
   contentContainer: {
     paddingHorizontal: 24,
-  },
-  mega: {
-    fontSize: 160,
-    color: Colors.white90,
-    lineHeight: 192,
-    height: 200,
-    alignItems: 'center',
-  },
-  status: {
-    fontSize: 48,
-    color: Colors.white90,
-    height: 80,
-    lineHeight: 80
-  },
-  sub: {
-    fontSize: 48,
-    color: Colors.black90,
-    lineHeight: 56,
   },
 });
 

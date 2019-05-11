@@ -11,20 +11,12 @@ import {
   Dimensions,
   Animated,
 } from 'react-native';
-
 import { Icon } from 'expo';
-
 import { Colors, Layout } from '../../constants';
 
-const width = Dimensions.get('window').width;
-
 export default class Header extends React.Component {
-  state = {
-    label: 'UV Index',
-  }
-
   render() {
-    let { label } = this.state;
+    let { label } = this.props;
     return (
       <View style={styles.labelRow}>
         <Text style={styles.label}>
@@ -52,6 +44,7 @@ const styles = StyleSheet.create({
     marginTop: 40,
     alignItems: 'center',
     paddingHorizontal: 24,
+    backgroundColor: 'rgba(0,0,0,0)'
   },
   label: {
     fontSize: 18,

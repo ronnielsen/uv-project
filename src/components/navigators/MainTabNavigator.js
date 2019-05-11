@@ -45,6 +45,8 @@ export default createMaterialTopTabNavigator({
       color: 'white',
       marginLeft: Layout.window.width / 2 - 96,
       width: 192,
+      position: 'absolute',
+      bottom: 64
     },
     iconStyle: {
       height: 64,
@@ -60,5 +62,18 @@ export default createMaterialTopTabNavigator({
     activeTintColor: 'white',
     showIcon: true,
     showLabel: false,
+    lazy: true,
+    tabBarComponent: props => {
+      const backgroundColor = props.position.interpolate({
+        inputRange: [0, 1, 2],
+        outputRange: ['orange', 'white', 'green'],
+      })
+      return (
+        <TabBarBottom
+          {...props}
+          style={{ backgroundColor: backgroundColor }}
+        />
+      );
+    },
   },
 });

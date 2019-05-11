@@ -8,16 +8,11 @@ import {
   TouchableOpacity,
   View,
   TextInput,
-  Dimensions,
   Animated,
 } from 'react-native';
-
 import { Icon } from 'expo';
+import { Colors } from '../../constants';
 
-import Colors from '../constants/Colors';
-import { MonoText } from '../components/StyledText';
-
-const width = Dimensions.get('window').width;
 
 export default class Header extends React.Component {
   state = {
@@ -31,15 +26,15 @@ export default class Header extends React.Component {
     let { number, status, sub, backgroundColor } = this.state;
     return (
       <View style={styles.labelRow}>
-        <MonoText style={styles.mega}>
+        <Text style={[{ fontFamily: 'plex-serif-bold' }, styles.mega ]}>
           {number}
-        </MonoText>
-        <MonoText style={styles.status}>
+        </Text>
+        <Text style={[{ fontFamily: 'plex-serif-bold' }, styles.status ]}>
           {status}
-        </MonoText>
-        <MonoText style={styles.sub}>
+        </Text>
+        <Text style={[{ fontFamily: 'plex-serif-bold' }, styles.sub ]}>
           {sub}
-        </MonoText>
+        </Text>
       </View>
     );
   }
