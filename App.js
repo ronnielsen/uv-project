@@ -8,6 +8,7 @@ import { store, persistor } from './src/redux';
 import { Colors, Layout } from './src/constants';
 import AppNavigator from './src/components/navigators';
 import LocationForm from './src/components/forms/LocationForm';
+import SwipeUpDown from 'react-native-swipe-up-down';
 
 export default class App extends React.Component {
 
@@ -34,7 +35,7 @@ export default class App extends React.Component {
           {isLoading ? this.renderLoading() : (
             <SafeAreaView style={styles.page}>
                 <View style={styles.container}>
-                  {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+                  {Platform.OS === 'ios' && <StatusBar barStyle="default" backgroundColor={'transparent'}/>}
                   <AppNavigator />
                   <Image
                     source={require('./assets/images/wave.png')}
@@ -42,7 +43,16 @@ export default class App extends React.Component {
                     pointerEvents="none"
                   />
                 </View>
-                <LocationForm />
+                <SwipeUpDown
+                	itemMini={<LocationForm />}
+                	itemFull={<LocationForm />}
+                	onShowMini={() => console.log('mini')}
+                	onShowFull={() => console.log('full')}
+                	onMoveDown={() => console.log('down')}
+                	onMoveUp={() => console.log('up')}
+                	style={{ backgroundColor: 'white', padding: 0}} // style for swipe
+                  animation="easeInEaseOut"
+                />
             </SafeAreaView>
           )}
         </PersistGate>

@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: Layout.window.height,
     width: Layout.window.width,
-    paddingTop: 100
+    paddingTop: 80
   },
   scrollContainer: {
   },

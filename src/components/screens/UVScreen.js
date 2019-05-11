@@ -16,7 +16,7 @@ import { Colors, Layout } from '../../constants';
 class UVScreen extends React.Component {
   static navigationOptions = {
     header: <Header label="UV Index" />,
-    headerTransparent: true
+    headerTransparent: true,
   };
 
   getBackgroundColor = () => {
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     height: Layout.window.height,
     width: Layout.window.width,
-    paddingTop: 100
+    paddingTop: 80
   },
   scrollContainer: {
   },

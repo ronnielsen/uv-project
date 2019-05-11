@@ -16,6 +16,7 @@ import { connect } from 'react-redux';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { Colors, Layout } from '../../constants';
 import { MainActions } from '../../redux/actions';
+import SwipeUpDown from 'react-native-swipe-up-down';
 
 class LocationForm extends React.Component {
   state = {
@@ -36,78 +37,75 @@ class LocationForm extends React.Component {
   render() {
     let { setLocation } = this.props;
     return (
-      <View style={styles.search} >
-        <KeyboardAvoidingView>
-
-          <Animated.View style={styles.searchRow}>
-            <GooglePlacesAutocomplete
-              placeholder={this.state.text}
-              minLength={3} // minimum length of text to search
-              autoFocus={false}
-              returnKeyType={"search"}
-              listViewDisplayed="true"
-              fetchDetails={true}
-              renderDescription={row =>
-                row.description || row.formatted_address || row.name
-              }
-              onPress={(data, details = null) => {
-                // this.props.handler(data.description)
-                console.log(data);
-                console.log(details);
-                setLocation(data.description);
-              }}
-              getDefaultValue={() => {
-                return ""; // text input default value
-              }}
-              query={{
-                key: 'AIzaSyA44NUmGHqIh8UQewJurulKlV3ZcLh5ETM',
-                language: "en", // language of the results
-                types: "(cities)" // default: 'geocode'
-              }}
-              styles={{
-                description: {
-                  height: 40,
-                  color: Colors.black90,
-                  fontSize: 20,
-                  fontFamily: 'plex-sans',
-                },
-                textInputContainer: {
-                  backgroundColor: 'white',
-                  borderTopWidth: 0,
-                  borderBottomWidth: 0,
-                  height: 40,
-                },
-                textInput: {
-                  marginLeft: 0,
-                  marginRight: 0,
-                  marginTop: 0,
-                  height: 40,
-                  backgroundColor: 'white',
-                  color: Colors.black90,
-                  fontSize: 20,
-                  fontFamily: 'plex-sans',
-                  paddingLeft: 0,
-                },
-              }}
-              enablePoweredByContainer={false}
-              nearbyPlacesAPI="GoogleReverseGeocoding"
-              GooglePlacesSearchQuery={{
-                rankby: "name",
-              }}
-              filterReverseGeocodingByTypes={[
-                "locality",
-                "administrative_area_level_3"
-              ]}
-              debounce={100}
-              renderLeftButton={()  => <Icon.Feather
-                name='search'
-                size={32}
-                style={styles.icon}
-                color={this.props.focused ? Colors.black90 : Colors.black50}
-              />}
-            />
-          </Animated.View>
-        </KeyboardAvoidingView>
+      <View style={styles.search} onPress={() => this.swipeUpDownRef.showFull()}>
+        <View style={styles.searchRow}>
+          <GooglePlacesAutocomplete
+            placeholder={this.state.text}
+            minLength={3} // minimum length of text to search
+            autoFocus={false}
+            returnKeyType={"search"}
+            listViewDisplayed="true"
+            fetchDetails={true}
+            renderDescription={row =>
+              row.description || row.formatted_address || row.name
+            }
+            onPress={(data, details = null) => {
+              // this.props.handler(data.description)
+              console.log(data);
+              console.log(details);
+              setLocation(data.description);
+            }}
+            getDefaultValue={() => {
+              return ""; // text input default value
+            }}
+            query={{
+              key: 'AIzaSyA44NUmGHqIh8UQewJurulKlV3ZcLh5ETM',
+              language: "en", // language of the results
+              types: "(cities)" // default: 'geocode'
+            }}
+            styles={{
+              description: {
+                height: 40,
+                color: Colors.black90,
+                fontSize: 20,
+                fontFamily: 'plex-sans',
+              },
+              textInputContainer: {
+                backgroundColor: 'white',
+                borderTopWidth: 0,
+                borderBottomWidth: 0,
+                height: 40,
+              },
+              textInput: {
+                marginLeft: 0,
+                marginRight: 0,
+                marginTop: 0,
+                height: 40,
+                backgroundColor: 'white',
+                color: Colors.black90,
+                fontSize: 20,
+                fontFamily: 'plex-sans',
+                paddingLeft: 0,
+              },
+            }}
+            enablePoweredByContainer={false}
+            nearbyPlacesAPI="GoogleReverseGeocoding"
+            GooglePlacesSearchQuery={{
+              rankby: "name",
+            }}
+            filterReverseGeocodingByTypes={[
+              "locality",
+              "administrative_area_level_3"
+            ]}
+            debounce={100}
+            renderLeftButton={()  => <Icon.Feather
+              name='search'
+              size={32}
+              style={styles.icon}
+              color={this.props.focused ? Colors.black90 : Colors.black50}
+            />}
+          />
+        </View>
       </View>
     );
   }
@@ -115,19 +113,17 @@ class LocationForm extends React.Component {
 
 const styles = StyleSheet.create({
   search: {
-    backgroundColor: 'white',
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
     overflow: 'hidden',
     width: Layout.window.width,
-    position: 'absolute',
-    bottom: 0,
+    marginTop: -4,
   },
   searchRow: {
     backgroundColor: 'white',
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 16,
+    paddingHorizontal: 16,
   },
   icon: {
     height: 40,

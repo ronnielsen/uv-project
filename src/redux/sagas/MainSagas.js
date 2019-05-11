@@ -18,8 +18,13 @@ export const setLocation = function * setLocation({location}) {
     let max = 10;
     return Math.floor(Math.random() * (max - min)) + min;
   }
+  function getRandomAir() {
+    let min = 1;
+    let max = 301;
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
   let uv = getRandom();
-  let air = getRandom();
+  let air = getRandomAir();
   yield put(MainActions.putLocation(location));
   yield put(MainActions.putUv(uv));
   yield put(MainActions.putAir(air));
