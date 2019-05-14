@@ -16,8 +16,18 @@ import { connect } from 'react-redux';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { Colors, Layout } from '../../constants';
 import { MainActions } from '../../redux/actions';
+import SlidingUpPanel from 'rn-sliding-up-panel';
 
 class LocationForm extends React.Component {
+  static defaultProps = {
+    draggableRange: {
+      top: 600,
+      bottom: 72
+    }
+  }
+
+  _draggedValue = new Animated.Value(72)
+
   state = {
     text: 'San Jose, CA',
     searchHeight: 96,
@@ -36,7 +46,14 @@ class LocationForm extends React.Component {
   render() {
     let { setLocation } = this.props;
     return (
-      <View style={styles.search} onPress={() => this.swipeUpDownRef.showFull()}>
+      <SlidingUpPanel
+        showBackdrop={false}
+        ref={c => (this._panel = c)}
+        draggableRange={this.props.draggableRange}
+        animatedValue={this._draggedValue}
+        snappingPoints={[600, 72]}
+        >
+      <View style={styles.search}>
         <View style={styles.line}></View>
         <View style={styles.searchRow}>
           <GooglePlacesAutocomplete
@@ -54,6 +71,7 @@ class LocationForm extends React.Component {
               console.log(data);
               console.log(details);
               setLocation(data.description);
+              _draggedValue = new Animated.Value(72)
             }}
             getDefaultValue={() => {
               return ""; // text input default value
@@ -65,10 +83,13 @@ class LocationForm extends React.Component {
             }}
             styles={{
               description: {
-                height: 40,
+                height: 64,
                 color: Colors.black90,
                 fontSize: 20,
                 fontFamily: 'plex-sans',
+              },
+              row: {
+                height: 48
               },
               textInputContainer: {
                 backgroundColor: 'white',
@@ -107,6 +128,7 @@ class LocationForm extends React.Component {
           />
         </View>
       </View>
+    </SlidingUpPanel>
     );
   }
 }
@@ -118,6 +140,8 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     width: Layout.window.width,
     paddingTop: 8,
+    backgroundColor: 'white',
+    height: 600,
   },
   searchRow: {
     backgroundColor: 'white',

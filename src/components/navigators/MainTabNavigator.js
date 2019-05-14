@@ -46,10 +46,10 @@ export default createMaterialTopTabNavigator({
       marginLeft: Layout.window.width / 2 - 96,
       width: 192,
       position: 'absolute',
-      bottom: 88
+      bottom: 80
     },
     iconStyle: {
-      height: 64,
+      height: 48,
       width: 64,
     },
     indicatorStyle: {

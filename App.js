@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View, Image, Dimensions, KeyboardAvoidingView } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View, Image, Dimensions, KeyboardAvoidingView, Animated } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import { Provider } from 'react-redux';
@@ -8,13 +8,19 @@ import { store, persistor } from './src/redux';
 import { Colors, Layout } from './src/constants';
 import AppNavigator from './src/components/navigators';
 import LocationForm from './src/components/forms/LocationForm';
-import BottomDrawer from 'rn-bottom-drawer';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
+const {height} = Dimensions.get('window')
 
 export default class App extends React.Component {
 
   state = {
     isLoadingComplete: false,
   };
+
+  componentWillUnmount() {
+    this._animatedValue.resetAnimation()
+  }
 
   renderLoading() {
     return (
@@ -27,14 +33,13 @@ export default class App extends React.Component {
   }
 
   render() {
-
     let isLoading = !this.state.isLoadingComplete && !this.props.skipLoadingScreen;
     return (
       <Provider store={store}>
         <PersistGate loading={this.renderLoading()} persistor={persistor}>
           {isLoading ? this.renderLoading() : (
             <SafeAreaView style={styles.page}>
-              <KeyboardAvoidingView style={styles.page}>
+              <View style={styles.page}>
                 <View style={styles.container}>
                   {Platform.OS === 'ios' && <StatusBar barStyle="default" backgroundColor={'transparent'}/>}
                   <AppNavigator />
@@ -44,18 +49,8 @@ export default class App extends React.Component {
                     pointerEvents="none"
                   />
                 </View>
-                <BottomDrawer
-                  containerHeight={360}
-                  startUp={false}
-                  downDisplay={268}
-                  shadow={false}
-                  >
-                  <LocationForm/>
-                </BottomDrawer>
-
-
-              </KeyboardAvoidingView>
-
+                <LocationForm/>
+              </View>
             </SafeAreaView>
           )}
         </PersistGate>
