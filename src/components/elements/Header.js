@@ -18,20 +18,21 @@ import { Colors, Layout } from '../../constants';
 
 class Header extends React.Component {
   render() {
-    let { label, icon, iconColor } = this.props;
+    let { label, icon, iconColor, buttonPress } = this.props;
     iconColor = this.props.iconColor ? iconColor : 'white'
+
     return (
       <View style={styles.labelRow}>
         <Text style={styles.label}>
           {label}
         </Text>
         <TouchableOpacity
-          onPress={() => this.props.navigation.navigate('Info')}
+          onPress={() => this.props.buttonPress ? this.props.navigation.navigate(buttonPress) : this.props.navigation.popToTop()}
           style={styles.infoButton}
           >
           <Icon.Feather
             name={icon}
-            size={38}
+            size={32}
             style={styles.info}
             color={this.props.focused ? iconColor : iconColor}
           />

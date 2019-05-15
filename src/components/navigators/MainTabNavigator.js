@@ -4,11 +4,22 @@ import { createStackNavigator, createMaterialTopTabNavigator} from 'react-naviga
 import { Colors, Layout } from '../../constants';
 import { AirScreen, UVScreen, InfoScreen } from '../screens';
 import TabBarIcon from '../icons/TabBarIcon';
+import { fadeIn } from 'react-navigation-transitions';
 
-const UVStack = createStackNavigator({
-  UV: UVScreen,
-  Info: InfoScreen,
-});
+const UVStack = createStackNavigator(
+  {
+    UV: {
+      screen: UVScreen,
+    },
+    Info: {
+      screen: InfoScreen
+    },
+  },
+  {
+    initialRouteName: 'UV',
+    transitionConfig: () => fadeIn(),
+  }
+);
 
 UVStack.navigationOptions = {
   tabBarLabel: 'UV',
@@ -20,10 +31,20 @@ UVStack.navigationOptions = {
   ),
 };
 
-const AirStack = createStackNavigator({
-  Air: AirScreen,
-  Info: InfoScreen,
-});
+const AirStack = createStackNavigator(
+  {
+    Air: {
+      screen: AirScreen,
+    },
+    Info: {
+      screen: InfoScreen
+    },
+  },
+  {
+    initialRouteName: 'Air',
+    transitionConfig: () => fadeIn(),
+  }
+);
 
 AirStack.navigationOptions = {
   tabBarLabel: 'Air',

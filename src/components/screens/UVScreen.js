@@ -15,7 +15,7 @@ import { Colors, Layout } from '../../constants';
 
 class UVScreen extends React.Component {
   static navigationOptions = {
-    header: <Header label="UV Index" icon="info"/>,
+    header: <Header label="UV Index" icon="info" buttonPress="Info"/>,
     headerTransparent: true,
   };
 
