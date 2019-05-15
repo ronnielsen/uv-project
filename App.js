@@ -37,11 +37,11 @@ export default class App extends React.Component {
     return (
       <Provider store={store}>
         <PersistGate loading={this.renderLoading()} persistor={persistor}>
+          {Platform.OS === 'ios' && <StatusBar barStyle="default" backgroundColor={'transparent'}/>}
           {isLoading ? this.renderLoading() : (
             <SafeAreaView style={styles.page}>
               <View style={styles.page}>
                 <View style={styles.container}>
-                  {Platform.OS === 'ios' && <StatusBar barStyle="default" backgroundColor={'transparent'}/>}
                   <AppNavigator />
                   <Image
                     source={require('./assets/images/wave.png')}

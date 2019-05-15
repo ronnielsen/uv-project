@@ -15,7 +15,7 @@ import { Colors, Layout } from '../../constants';
 
 class AirScreen extends React.Component {
   static navigationOptions = {
-    header: <Header label="Air Quality" />,
+    header: <Header label="Air Quality" icon="info"/>,
     headerTransparent: true
   };
 

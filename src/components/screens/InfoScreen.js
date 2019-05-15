@@ -13,56 +13,27 @@ import { connect } from 'react-redux';
 import { Content, Header } from '../elements';
 import { Colors, Layout } from '../../constants';
 
-class UVScreen extends React.Component {
+class InfoScreen extends React.Component {
   static navigationOptions = {
-    header: <Header label="UV Index" icon="info"/>,
+    header: <Header label="UV Index" icon="x-circle"/>,
     headerTransparent: true,
   };
 
-  getBackgroundColor = () => {
-    let { uv } = this.props.main;
-    if (uv < 3) return Colors.green;
-    if (uv < 6) return Colors.yellow;
-    if (uv < 8) return Colors.orange;
-    if (uv < 11) return Colors.red;
-    return Colors.purple;
-  }
-
-  getStatus = () => {
-    let { uv } = this.props.main;
-    if (uv < 3) return 'Low';
-    if (uv < 6) return 'Moderate';
-    if (uv < 8) return 'High';
-    if (uv < 11) return 'Very High';
-    return 'Extreme';
-  }
-
-  getSub = () => {
-    let { uv } = this.props.main;
-    return "risk of sun exposure";
-  }
-
   render() {
     return (
-      <View style={[styles.container, { backgroundColor: this.getBackgroundColor() }]}>
+      <View style={styles.container}>
         <ScrollView
           style={styles.scrollContainer}
           contentContainerStyle={styles.contentContainer}>
+            <Text style={[{ fontFamily: 'plex-serif-bold' }, styles.mega ]}>
+              INFO PAGE
+            </Text>
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Info')}
+              onPress={() => this.props.navigation.navigate('Main')}
               style={styles.infoButton}
               >
-              <Text>toInfo</Text>
+              <Text>Back</Text>
             </TouchableOpacity>
-            <Text style={[{ fontFamily: 'plex-serif-bold' }, styles.mega ]}>
-              {this.props.main.uv}
-            </Text>
-            <Text style={[{ fontFamily: 'plex-serif-bold' }, styles.status ]}>
-              {this.getStatus()}
-            </Text>
-            <Text style={[{ fontFamily: 'plex-serif-bold' }, styles.sub ]}>
-              {this.getSub()}
-            </Text>
         </ScrollView>
       </View>
     );
@@ -75,7 +46,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     height: Layout.window.height,
     width: Layout.window.width,
-    paddingTop: 80
+    paddingTop: 80,
+    backgroundColor: 'white',
+    zIndex: 1000,
   },
   scrollContainer: {
   },
@@ -83,8 +56,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   mega: {
-    fontSize: 160,
-    color: Colors.white90,
+    fontSize: 48,
+    color: Colors.black90,
     lineHeight: 192,
     height: 200,
     alignItems: 'center',
@@ -106,11 +79,7 @@ const styles = StyleSheet.create({
     width: Layout.window.width,
     position: 'absolute',
     top: 0,
-  },
-  infoButton: {
-    height: 40,
-    width: 300,
-  },
+  }
 });
 
 const mapStateToProps = (state) => {
@@ -125,4 +94,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UVScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(InfoScreen)

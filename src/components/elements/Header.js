@@ -16,17 +16,18 @@ import { Colors, Layout } from '../../constants';
 
 export default class Header extends React.Component {
   render() {
-    let { label } = this.props;
+    let { label, icon } = this.props;
     return (
       <View style={styles.labelRow}>
         <Text style={styles.label}>
           {label}
         </Text>
         <Icon.Feather
-          name='info'
+          name={icon}
           size={38}
           style={styles.info}
           color={this.props.focused ? Colors.white50 : Colors.white90}
+          onPress={() => console.log('info pressed')}
         />
       </View>
     );

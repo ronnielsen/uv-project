@@ -1,6 +1,6 @@
 import React from 'react';
 import { Platform, View } from 'react-native';
-import { createStackNavigator, createMaterialTopTabNavigator } from 'react-navigation';
+import { createStackNavigator, createMaterialTopTabNavigator} from 'react-navigation';
 import { Colors, Layout } from '../../constants';
 import { AirScreen, UVScreen } from '../screens';
 import TabBarIcon from '../icons/TabBarIcon';

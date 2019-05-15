@@ -17,6 +17,7 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import { Colors, Layout } from '../../constants';
 import { MainActions } from '../../redux/actions';
 import SlidingUpPanel from 'rn-sliding-up-panel';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 class LocationForm extends React.Component {
   static defaultProps = {
@@ -26,7 +27,7 @@ class LocationForm extends React.Component {
     }
   }
 
-  _draggedValue = new Animated.Value(72)
+  _draggedValue = new Animated.Value(72);
 
   state = {
     text: 'San Jose, CA',
@@ -44,10 +45,11 @@ class LocationForm extends React.Component {
   }
 
   render() {
+    const {top, bottom} = this.props.draggableRange
+
     let { setLocation } = this.props;
     return (
       <SlidingUpPanel
-        showBackdrop={false}
         ref={c => (this._panel = c)}
         draggableRange={this.props.draggableRange}
         animatedValue={this._draggedValue}
@@ -55,7 +57,7 @@ class LocationForm extends React.Component {
         >
       <View style={styles.search}>
         <View style={styles.line}></View>
-        <View style={styles.searchRow}>
+        <View style={styles.searchRow} >
           <GooglePlacesAutocomplete
             placeholder={this.state.text}
             minLength={3} // minimum length of text to search
@@ -67,7 +69,6 @@ class LocationForm extends React.Component {
               row.description || row.formatted_address || row.name
             }
             onPress={(data, details = null) => {
-              // this.props.handler(data.description)
               console.log(data);
               console.log(details);
               setLocation(data.description);
@@ -109,6 +110,17 @@ class LocationForm extends React.Component {
                 paddingLeft: 0,
               },
             }}
+            textInputProps={{
+              onFocus: () => {
+                console.log('FOCUS!!!!!!!!!!')
+                setTimeout(() => {this._panel.show()}, 300);
+
+              },
+              onBlur: () => {
+                console.log('BLUR!!!!!!!!')
+                this._panel.hide()
+              }
+            }}
             enablePoweredByContainer={false}
             nearbyPlacesAPI="GoogleReverseGeocoding"
             GooglePlacesSearchQuery={{
@@ -118,7 +130,7 @@ class LocationForm extends React.Component {
               "locality",
               "administrative_area_level_3"
             ]}
-            debounce={100}
+            debounce={0}
             renderLeftButton={()  => <Icon.Feather
               name='search'
               size={32}
