@@ -120,5 +120,6 @@ export default createStackNavigator(
     Info: InfoScreen,
   },
   {
+    headerMode: 'screen'
   }
 );

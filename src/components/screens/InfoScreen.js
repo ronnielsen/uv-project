@@ -28,7 +28,7 @@ class InfoScreen extends React.Component {
             style={styles.scrollContainer}
             contentContainerStyle={styles.contentContainer}>
             <TouchableOpacity
-              onPress={() => this.props.navigation.goBack()}
+              onPress={() => this.props.navigation.navigate('Home')}
               style={styles.infoButton}
               >
               <Text>Back</Text>
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     height: Layout.window.height,
     width: Layout.window.width,
-    paddingTop: 80,
+    paddingTop: 10,
     backgroundColor: 'white',
     zIndex: 1000,
   },
