@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
   labelRow: {
     flexDirection: 'row',
-    marginTop: 24,
+    marginTop: 44,
     alignItems: 'center',
     paddingHorizontal: 24,
     backgroundColor: 'transparent',

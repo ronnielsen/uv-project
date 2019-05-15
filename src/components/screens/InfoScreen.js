@@ -10,6 +10,7 @@ import {
   Dimensions,
 } from 'react-native';
 import { connect } from 'react-redux';
+import { SafeAreaView } from 'react-navigation';
 import { Content, Header } from '../elements';
 import { Colors, Layout } from '../../constants';
 
@@ -22,16 +23,18 @@ class InfoScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ScrollView
-          style={styles.scrollContainer}
-          contentContainerStyle={styles.contentContainer}>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.goBack()}
-            style={styles.infoButton}
-            >
-            <Text>Back</Text>
-          </TouchableOpacity>
-        </ScrollView>
+        <SafeAreaView>
+          <ScrollView
+            style={styles.scrollContainer}
+            contentContainerStyle={styles.contentContainer}>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.goBack()}
+              style={styles.infoButton}
+              >
+              <Text>Back</Text>
+            </TouchableOpacity>
+          </ScrollView>
+        </SafeAreaView>
       </View>
     );
   }

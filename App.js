@@ -1,13 +1,11 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View, Image, Dimensions, KeyboardAvoidingView, Animated } from 'react-native';
-import { SafeAreaView } from 'react-navigation';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import { store, persistor } from './src/redux';
 import { Colors, Layout } from './src/constants';
 import AppNavigator from './src/components/navigators';
-import LocationForm from './src/components/forms/LocationForm';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const {height} = Dimensions.get('window')
@@ -39,19 +37,16 @@ export default class App extends React.Component {
         <PersistGate loading={this.renderLoading()} persistor={persistor}>
           {Platform.OS === 'ios' && <StatusBar barStyle="default" backgroundColor={'transparent'}/>}
           {isLoading ? this.renderLoading() : (
-            <SafeAreaView style={styles.page}>
-              <View style={styles.page}>
-                <View style={styles.container}>
-                  <AppNavigator />
-                  <Image
-                    source={require('./assets/images/wave.png')}
-                    style={styles.wave}
-                    pointerEvents="none"
-                  />
-                </View>
-                <LocationForm/>
+            <View style={styles.page}>
+              <View style={styles.container}>
+                <AppNavigator />
+                <Image
+                  source={require('./assets/images/wave.png')}
+                  style={styles.wave}
+                  pointerEvents="none"
+                />
               </View>
-            </SafeAreaView>
+            </View>
           )}
         </PersistGate>
       </Provider>
@@ -90,7 +85,7 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   page: {
-    flex: 1,
+    flex: 1
   },
   container: {
     flex: 1,

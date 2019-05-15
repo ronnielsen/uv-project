@@ -1,19 +1,19 @@
 import React from 'react';
 import { Platform, View } from 'react-native';
-import { createStackNavigator, createMaterialTopTabNavigator} from 'react-navigation';
+import { createStackNavigator, createMaterialTopTabNavigator, SafeAreaView} from 'react-navigation';
+// import createAnimatedSwitchNavigator from 'react-navigation-animated-switch';
+import { Transition } from 'react-native-reanimated';
 import { Colors, Layout } from '../../constants';
 import { AirScreen, UVScreen, InfoScreen } from '../screens';
 import TabBarIcon from '../icons/TabBarIcon';
 import { fadeIn } from 'react-navigation-transitions';
+import LocationForm from '../forms/LocationForm';
 
 const UVStack = createStackNavigator(
   {
     UV: {
       screen: UVScreen,
-    },
-    Info: {
-      screen: InfoScreen
-    },
+    }
   },
   {
     initialRouteName: 'UV',
@@ -35,10 +35,7 @@ const AirStack = createStackNavigator(
   {
     Air: {
       screen: AirScreen,
-    },
-    Info: {
-      screen: InfoScreen
-    },
+    }
   },
   {
     initialRouteName: 'Air',
@@ -56,7 +53,7 @@ AirStack.navigationOptions = {
   ),
 };
 
-export default createMaterialTopTabNavigator({
+let TabNavigator = createMaterialTopTabNavigator({
   UVStack,
   AirStack,
 }, {
@@ -99,3 +96,29 @@ export default createMaterialTopTabNavigator({
     },
   },
 });
+
+class HomeNavigator extends React.Component {
+  static router = TabNavigator.router;
+  static navigationOptions = {
+    header: null,
+    headerTransparent: true,
+  };
+  render() {
+    const { navigation } = this.props;
+    return (
+      <View style={{flex: 1}}>
+        <TabNavigator navigation={navigation} />
+        <SafeAreaView><LocationForm /></SafeAreaView>
+      </View>
+    )
+  }
+}
+
+export default createStackNavigator(
+  {
+    Home: HomeNavigator,
+    Info: InfoScreen,
+  },
+  {
+  }
+);

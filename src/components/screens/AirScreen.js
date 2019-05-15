@@ -10,6 +10,7 @@ import {
   Dimensions,
 } from 'react-native';
 import { connect } from 'react-redux';
+import { SafeAreaView } from 'react-navigation';
 import { Content, Header } from '../elements';
 import { Colors, Layout } from '../../constants';
 
@@ -47,25 +48,27 @@ class AirScreen extends React.Component {
   render() {
     return (
       <View style={[styles.container, { backgroundColor: this.getBackgroundColor() }]}>
-        <ScrollView
-          style={styles.scrollContainer}
-          contentContainerStyle={styles.contentContainer}>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('Info')}
-            style={styles.infoButton}
-            >
-            <Text>toInfo</Text>
-          </TouchableOpacity>
-          <Text style={[{ fontFamily: 'plex-serif-bold' }, styles.mega ]}>
-            {this.props.main.air}
-          </Text>
-          <Text style={[{ fontFamily: 'plex-serif-bold' }, styles.status ]}>
-            {this.getStatus()}
-          </Text>
-          <Text style={[{ fontFamily: 'plex-serif-bold' }, styles.sub ]}>
-            {this.getSub()}
-          </Text>
-        </ScrollView>
+        <SafeAreaView>
+          <ScrollView
+            style={styles.scrollContainer}
+            contentContainerStyle={styles.contentContainer}>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('Info')}
+              style={styles.infoButton}
+              >
+              <Text>toInfo</Text>
+            </TouchableOpacity>
+            <Text style={[{ fontFamily: 'plex-serif-bold' }, styles.mega ]}>
+              {this.props.main.air}
+            </Text>
+            <Text style={[{ fontFamily: 'plex-serif-bold' }, styles.status ]}>
+              {this.getStatus()}
+            </Text>
+            <Text style={[{ fontFamily: 'plex-serif-bold' }, styles.sub ]}>
+              {this.getSub()}
+            </Text>
+          </ScrollView>
+        </SafeAreaView>
       </View>
     );
   }
