@@ -13,9 +13,10 @@ import {
   Navigator,
 } from 'react-native';
 import { Icon } from 'expo';
+import { withNavigation } from 'react-navigation';
 import { Colors, Layout } from '../../constants';
 
-export default class Header extends React.Component {
+class Header extends React.Component {
   render() {
     let { label, icon, iconColor } = this.props;
     iconColor = this.props.iconColor ? iconColor : 'white'
@@ -25,7 +26,7 @@ export default class Header extends React.Component {
           {label}
         </Text>
         <TouchableOpacity
-          onPress={() => console.log('Info Button Pressed')}
+          onPress={() => this.props.navigation.navigate('Info')}
           style={styles.infoButton}
           >
           <Icon.Feather
@@ -60,3 +61,6 @@ const styles = StyleSheet.create({
     fontFamily: 'plex-serif-bold',
   },
 });
+
+
+export default withNavigation(Header);
