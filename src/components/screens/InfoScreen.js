@@ -15,7 +15,7 @@ import { Colors, Layout } from '../../constants';
 
 class InfoScreen extends React.Component {
   static navigationOptions = {
-    header: <Header label="UV Index" icon="x-circle"/>,
+    header: <Header label="Info Page" icon="x-circle" iconColor="pink" />,
     headerTransparent: true,
   };
 
@@ -25,15 +25,12 @@ class InfoScreen extends React.Component {
         <ScrollView
           style={styles.scrollContainer}
           contentContainerStyle={styles.contentContainer}>
-            <Text style={[{ fontFamily: 'plex-serif-bold' }, styles.mega ]}>
-              INFO PAGE
-            </Text>
-            <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Main')}
-              style={styles.infoButton}
-              >
-              <Text>Back</Text>
-            </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => this.props.navigation.goBack()}
+            style={styles.infoButton}
+            >
+            <Text>Back</Text>
+          </TouchableOpacity>
         </ScrollView>
       </View>
     );

@@ -10,25 +10,31 @@ import {
   TextInput,
   Dimensions,
   Animated,
+  Navigator,
 } from 'react-native';
 import { Icon } from 'expo';
 import { Colors, Layout } from '../../constants';
 
 export default class Header extends React.Component {
   render() {
-    let { label, icon } = this.props;
+    let { label, icon, iconColor } = this.props;
+    iconColor = this.props.iconColor ? iconColor : 'white'
     return (
       <View style={styles.labelRow}>
         <Text style={styles.label}>
           {label}
         </Text>
-        <Icon.Feather
-          name={icon}
-          size={38}
-          style={styles.info}
-          color={this.props.focused ? Colors.white50 : Colors.white90}
-          onPress={() => console.log('info pressed')}
-        />
+        <TouchableOpacity
+          onPress={() => console.log('Info Button Pressed')}
+          style={styles.infoButton}
+          >
+          <Icon.Feather
+            name={icon}
+            size={38}
+            style={styles.info}
+            color={this.props.focused ? iconColor : iconColor}
+          />
+        </TouchableOpacity>
       </View>
     );
   }

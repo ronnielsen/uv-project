@@ -2,11 +2,12 @@ import React from 'react';
 import { Platform, View } from 'react-native';
 import { createStackNavigator, createMaterialTopTabNavigator} from 'react-navigation';
 import { Colors, Layout } from '../../constants';
-import { AirScreen, UVScreen } from '../screens';
+import { AirScreen, UVScreen, InfoScreen } from '../screens';
 import TabBarIcon from '../icons/TabBarIcon';
 
 const UVStack = createStackNavigator({
   UV: UVScreen,
+  Info: InfoScreen,
 });
 
 UVStack.navigationOptions = {
@@ -21,6 +22,7 @@ UVStack.navigationOptions = {
 
 const AirStack = createStackNavigator({
   Air: AirScreen,
+  Info: InfoScreen,
 });
 
 AirStack.navigationOptions = {
@@ -32,7 +34,6 @@ AirStack.navigationOptions = {
     />
   ),
 };
-
 
 export default createMaterialTopTabNavigator({
   UVStack,
