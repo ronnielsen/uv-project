@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, View } from 'react-native';
+import { Platform, View, Image, StyleSheet } from 'react-native';
 import { createStackNavigator, createMaterialTopTabNavigator, SafeAreaView} from 'react-navigation';
 // import createAnimatedSwitchNavigator from 'react-navigation-animated-switch';
 import { Transition } from 'react-native-reanimated';
@@ -17,7 +17,6 @@ const UVStack = createStackNavigator(
   },
   {
     initialRouteName: 'UV',
-    transitionConfig: () => fadeIn(),
   }
 );
 
@@ -108,6 +107,11 @@ class HomeNavigator extends React.Component {
     return (
       <View style={{flex: 1}}>
         <TabNavigator navigation={navigation} />
+        <Image
+          source={require('../../../assets/images/wave.png')}
+          style={styles.wave}
+          pointerEvents="none"
+        ></Image>
         <SafeAreaView><LocationForm /></SafeAreaView>
       </View>
     )
@@ -120,6 +124,21 @@ export default createStackNavigator(
     Info: InfoScreen,
   },
   {
-    headerMode: 'screen'
+    headerMode: 'screen',
+    transitionConfig: () => fadeIn(),
+
   }
 );
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  wave: {
+    resizeMode: 'stretch',
+    height: Layout.window.height,
+    width: Layout.window.width,
+    position: 'absolute',
+    top: 0,
+  }
+});

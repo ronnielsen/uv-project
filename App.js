@@ -40,11 +40,6 @@ export default class App extends React.Component {
             <View style={styles.page}>
               <View style={styles.container}>
                 <AppNavigator />
-                <Image
-                  source={require('./assets/images/wave.png')}
-                  style={styles.wave}
-                  pointerEvents="none"
-                />
               </View>
             </View>
           )}

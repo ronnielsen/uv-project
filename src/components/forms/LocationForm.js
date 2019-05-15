@@ -23,7 +23,7 @@ class LocationForm extends React.Component {
   static defaultProps = {
     draggableRange: {
       top: 600,
-      bottom: 88
+      bottom: 72
     }
   }
 
