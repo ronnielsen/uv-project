@@ -13,6 +13,7 @@ import { SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
 import { Content, Header } from '../elements';
 import { Colors, Layout } from '../../constants';
+import { Icon } from 'expo';
 
 class UVScreen extends React.Component {
   static navigationOptions = {
@@ -46,7 +47,7 @@ class UVScreen extends React.Component {
   render() {
     return (
       <View style={[styles.container, { backgroundColor: this.getBackgroundColor() }]}>
-        <SafeAreaView>
+        <SafeAreaView style={styles.container}>
           <ScrollView
             style={styles.scrollContainer}
             contentContainerStyle={styles.contentContainer}>
@@ -72,12 +73,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     height: Layout.window.height,
     width: Layout.window.width,
-    paddingTop: 80
   },
   scrollContainer: {
   },
   contentContainer: {
     paddingHorizontal: 24,
+    flex: 1,
+    paddingTop: 64,
   },
   mega: {
     fontSize: 160,
@@ -95,17 +97,6 @@ const styles = StyleSheet.create({
     fontSize: 48,
     color: Colors.black90,
     lineHeight: 56,
-  },
-  wave: {
-    resizeMode: 'stretch',
-    height: Layout.window.height,
-    width: Layout.window.width,
-    position: 'absolute',
-    top: 0,
-  },
-  infoButton: {
-    height: 40,
-    width: 300,
   },
 });
 

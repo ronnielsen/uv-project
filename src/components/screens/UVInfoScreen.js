@@ -20,10 +20,33 @@ class UVInfoScreen extends React.Component {
     headerTransparent: true,
   };
 
+  getBackgroundColor = () => {
+    let { uv } = this.props.main;
+    if (uv < 3) return Colors.green;
+    if (uv < 6) return Colors.yellow;
+    if (uv < 8) return Colors.orange;
+    if (uv < 11) return Colors.red;
+    return Colors.purple;
+  }
+
+  getStatus = () => {
+    let { uv } = this.props.main;
+    if (uv < 3) return 'Low';
+    if (uv < 6) return 'Moderate';
+    if (uv < 8) return 'High';
+    if (uv < 11) return 'Very High';
+    return 'Extreme';
+  }
+
+  getSub = () => {
+    let { uv } = this.props.main;
+    return "risk of sun exposure";
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <SafeAreaView>
+        <SafeAreaView style={styles.container}>
           <ScrollView
             style={styles.scrollContainer}
             contentContainerStyle={styles.contentContainer}>
@@ -43,38 +66,19 @@ const styles = StyleSheet.create({
     width: Layout.window.width,
     paddingTop: 10,
     backgroundColor: 'white',
-    zIndex: 1000,
   },
   scrollContainer: {
   },
   contentContainer: {
     paddingHorizontal: 24,
+    flex: 1,
   },
-  mega: {
+  status: {
     fontSize: 48,
-    color: Colors.black90,
     lineHeight: 192,
     height: 200,
     alignItems: 'center',
   },
-  status: {
-    fontSize: 48,
-    color: Colors.white90,
-    lineHeight: 64,
-    marginBottom: 16,
-  },
-  sub: {
-    fontSize: 48,
-    color: Colors.black90,
-    lineHeight: 56,
-  },
-  wave: {
-    resizeMode: 'stretch',
-    height: Layout.window.height,
-    width: Layout.window.width,
-    position: 'absolute',
-    top: 0,
-  }
 });
 
 const mapStateToProps = (state) => {
