@@ -16,7 +16,7 @@ import { Colors, Layout } from '../../constants';
 
 class UVInfoScreen extends React.Component {
   static navigationOptions = {
-    header: <Header label="" icon="x-circle" iconColor={Colors.red} />,
+    header: <Header label="UV Index" icon="x-circle" iconColor={Colors.black50} />,
     headerTransparent: true,
   };
 
@@ -50,7 +50,31 @@ class UVInfoScreen extends React.Component {
           <ScrollView
             style={styles.scrollContainer}
             contentContainerStyle={styles.contentContainer}>
-            <UVInfoText />
+            <Text style={[{ color: this.getBackgroundColor() }, styles.mega ]}>
+              {this.props.main.uv}
+            </Text>
+            <View style={styles.labelRow}>
+              <Text style={[{ fontFamily: 'plex-serif-bold' }, styles.label ]}>
+                wear your
+              </Text>
+              <Text style={[{ color: this.getBackgroundColor() }, styles.items ]}>
+                hat,
+              </Text>
+              <Text style={[{ color: this.getBackgroundColor() }, styles.items ]}>
+                 sunglasses,
+              </Text>
+              <Text style={[{ color: this.getBackgroundColor() }, styles.items ]}>
+                 and sunblock
+              </Text>
+            </View>
+            <View style={styles.labelRow}>
+              <Text style={[{ fontFamily: 'plex-serif-bold' }, styles.label ]}>
+                avoid sunlight
+              </Text>
+              <Text style={[{ color: this.getBackgroundColor() }, styles.items ]}>
+                 between 10am-4pm
+              </Text>
+            </View>
           </ScrollView>
         </SafeAreaView>
       </View>
@@ -64,7 +88,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     height: Layout.window.height,
     width: Layout.window.width,
-    paddingTop: 10,
     backgroundColor: 'white',
   },
   scrollContainer: {
@@ -73,12 +96,28 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     flex: 1,
   },
-  status: {
-    fontSize: 48,
+  mega: {
+    fontSize: 160,
     lineHeight: 192,
     height: 200,
     alignItems: 'center',
+    fontFamily: 'plex-serif-bold'
   },
+  labelRow: {
+    marginBottom: 24,
+  },
+  label: {
+    fontSize: 32,
+    color: Colors.black90,
+    lineHeight: 40,
+    alignItems: 'center',
+    fontFamily: 'plex-serif-bold'
+  },
+  items: {
+      fontSize: 32,
+      lineHeight: 40,
+      fontFamily: 'plex-serif-bold'
+  }
 });
 
 const mapStateToProps = (state) => {

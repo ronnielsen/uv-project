@@ -17,7 +17,7 @@ import { Icon } from 'expo';
 
 class UVScreen extends React.Component {
   static navigationOptions = {
-    header: <Header label="UV Index" icon="feather" buttonPress="UVInfo"/>,
+    header: <Header label="UV Index" icon="sun" buttonPress="UVInfo"/>,
     headerTransparent: true,
   };
 
