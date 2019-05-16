@@ -16,7 +16,7 @@ import { Colors, Layout } from '../../constants';
 
 class UVScreen extends React.Component {
   static navigationOptions = {
-    header: <Header label="UV Index" icon="info" buttonPress="Info"/>,
+    header: <Header label="UV Index" icon="feather" buttonPress="UVInfo"/>,
     headerTransparent: true,
   };
 
@@ -50,12 +50,6 @@ class UVScreen extends React.Component {
           <ScrollView
             style={styles.scrollContainer}
             contentContainerStyle={styles.contentContainer}>
-              <TouchableOpacity
-                onPress={() => this.props.navigation.navigate('Info')}
-                style={styles.infoButton}
-                >
-                <Text>toInfo</Text>
-              </TouchableOpacity>
               <Text style={[{ fontFamily: 'plex-serif-bold' }, styles.mega ]}>
                 {this.props.main.uv}
               </Text>
@@ -96,7 +90,6 @@ const styles = StyleSheet.create({
     fontSize: 48,
     color: Colors.white90,
     lineHeight: 64,
-    marginBottom: 16,
   },
   sub: {
     fontSize: 48,

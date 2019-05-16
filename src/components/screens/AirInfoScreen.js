@@ -11,12 +11,12 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { SafeAreaView } from 'react-navigation';
-import { Content, Header } from '../elements';
+import { Content, Header, AirInfoText } from '../elements';
 import { Colors, Layout } from '../../constants';
 
-class InfoScreen extends React.Component {
+class AirInfoScreen extends React.Component {
   static navigationOptions = {
-    header: <Header label="Info Page" icon="x-circle" iconColor="pink" />,
+    header: <Header label="" icon="x-circle" iconColor={Colors.red} />,
     headerTransparent: true,
   };
 
@@ -27,12 +27,7 @@ class InfoScreen extends React.Component {
           <ScrollView
             style={styles.scrollContainer}
             contentContainerStyle={styles.contentContainer}>
-            <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Home')}
-              style={styles.infoButton}
-              >
-              <Text>Back</Text>
-            </TouchableOpacity>
+            <AirInfoText />
           </ScrollView>
         </SafeAreaView>
       </View>
@@ -94,4 +89,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(InfoScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(AirInfoScreen)

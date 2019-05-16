@@ -4,7 +4,7 @@ import { createStackNavigator, createMaterialTopTabNavigator, SafeAreaView} from
 // import createAnimatedSwitchNavigator from 'react-navigation-animated-switch';
 import { Transition } from 'react-native-reanimated';
 import { Colors, Layout } from '../../constants';
-import { AirScreen, UVScreen, InfoScreen } from '../screens';
+import { AirScreen, UVScreen, AirInfoScreen, UVInfoScreen } from '../screens';
 import TabBarIcon from '../icons/TabBarIcon';
 import { fadeIn } from 'react-navigation-transitions';
 import LocationForm from '../forms/LocationForm';
@@ -121,7 +121,8 @@ class HomeNavigator extends React.Component {
 export default createStackNavigator(
   {
     Home: HomeNavigator,
-    Info: InfoScreen,
+    UVInfo: UVInfoScreen,
+    AirInfo: AirInfoScreen
   },
   {
     headerMode: 'screen',

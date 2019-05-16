@@ -16,7 +16,7 @@ import { Colors, Layout } from '../../constants';
 
 class AirScreen extends React.Component {
   static navigationOptions = {
-    header: <Header label="Air Quality" icon="info" buttonPress="Info"/>,
+    header: <Header label="Air Quality" icon="feather" buttonPress="AirInfo"/>,
     headerTransparent: true
   };
 
@@ -34,7 +34,7 @@ class AirScreen extends React.Component {
     let { air } = this.props.main;
     if (air < 50) return 'Good';
     if (air < 100) return 'Moderate';
-    if (air < 150) return 'Unhealthy if Sensitive';
+    if (air < 150) return 'Bad';
     if (air < 200) return 'Unhealthy';
     if (air < 300) return 'Very Unhealthy';
     return 'Hazardous';
@@ -52,12 +52,6 @@ class AirScreen extends React.Component {
           <ScrollView
             style={styles.scrollContainer}
             contentContainerStyle={styles.contentContainer}>
-            <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Info')}
-              style={styles.infoButton}
-              >
-              <Text>toInfo</Text>
-            </TouchableOpacity>
             <Text style={[{ fontFamily: 'plex-serif-bold' }, styles.mega ]}>
               {this.props.main.air}
             </Text>
@@ -97,7 +91,6 @@ const styles = StyleSheet.create({
     fontSize: 48,
     color: Colors.white90,
     lineHeight: 64,
-    marginBottom: 16,
   },
   sub: {
     fontSize: 48,

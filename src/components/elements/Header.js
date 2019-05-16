@@ -44,9 +44,15 @@ class Header extends React.Component {
 
 const styles = StyleSheet.create({
   info: {
+    height: 32,
+    width: 32,
+    textAlign: 'center',
+  },
+  infoButton: {
     height: 40,
     width: 40,
-    textAlign: 'center'
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   labelRow: {
     flexDirection: 'row',

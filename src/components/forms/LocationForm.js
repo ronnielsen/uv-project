@@ -90,7 +90,7 @@ class LocationForm extends React.Component {
                 fontFamily: 'plex-sans',
               },
               row: {
-                height: 48
+                height: 56
               },
               textInputContainer: {
                 backgroundColor: 'white',
@@ -113,7 +113,7 @@ class LocationForm extends React.Component {
             textInputProps={{
               onFocus: () => {
                 console.log('FOCUS!!!!!!!!!!')
-                setTimeout(() => {this._panel.show()}, 300);
+                setTimeout(() => {this._panel.show()}, 50);
 
               },
               onBlur: () => {
