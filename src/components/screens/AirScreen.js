@@ -98,17 +98,6 @@ const styles = StyleSheet.create({
     color: Colors.black90,
     lineHeight: 56,
   },
-  wave: {
-    resizeMode: 'stretch',
-    height: Layout.window.height,
-    width: Layout.window.width,
-    position: 'absolute',
-    top: 0,
-  },
-  infoButton: {
-    height: 40,
-    width: 300,
-  },
 });
 
 const mapStateToProps = (state) => {

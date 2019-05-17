@@ -55,92 +55,97 @@ class LocationForm extends React.Component {
         animatedValue={this._draggedValue}
         snappingPoints={[600, 72]}
         >
-      <View style={styles.search}>
-        <View style={styles.line}></View>
-        <View style={styles.searchRow} >
-          <GooglePlacesAutocomplete
-            placeholder={this.state.text}
-            minLength={3} // minimum length of text to search
-            autoFocus={false}
-            returnKeyType={"search"}
-            listViewDisplayed="true"
-            fetchDetails={true}
-            renderDescription={row =>
-              row.description || row.formatted_address || row.name
-            }
-            onPress={(data, details = null) => {
-              console.log(data);
-              console.log(details);
-              setLocation(data.description);
-              _draggedValue = new Animated.Value(72)
-            }}
-            getDefaultValue={() => {
-              return ""; // text input default value
-            }}
-            query={{
-              key: 'AIzaSyA44NUmGHqIh8UQewJurulKlV3ZcLh5ETM',
-              language: "en", // language of the results
-              types: "(cities)" // default: 'geocode'
-            }}
-            styles={{
-              description: {
-                height: 64,
-                color: Colors.black90,
-                fontSize: 20,
-                fontFamily: 'plex-sans',
-              },
-              row: {
-                height: 56
-              },
-              textInputContainer: {
-                backgroundColor: 'white',
-                borderTopWidth: 0,
-                borderBottomWidth: 0,
-                height: 40,
-              },
-              textInput: {
-                marginLeft: 0,
-                marginRight: 0,
-                marginTop: 0,
-                height: 40,
-                backgroundColor: 'white',
-                color: Colors.black90,
-                fontSize: 20,
-                fontFamily: 'plex-sans',
-                paddingLeft: 0,
-              },
-            }}
-            textInputProps={{
-              onFocus: () => {
-                console.log('FOCUS!!!!!!!!!!')
-                setTimeout(() => {this._panel.show()}, 50);
-
-              },
-              onBlur: () => {
-                console.log('BLUR!!!!!!!!')
-                this._panel.hide()
+        <View style={styles.search}>
+          <View style={styles.line}></View>
+          <View style={styles.searchRow} >
+            <GooglePlacesAutocomplete
+              placeholder={this.state.text}
+              minLength={2} // minimum length of text to search
+              autoFocus={false}
+              returnKeyType={"search"}
+              listViewDisplayed="true"
+              fetchDetails={true}
+              renderDescription={row =>
+                row.description || row.formatted_address || row.name
               }
-            }}
-            enablePoweredByContainer={false}
-            nearbyPlacesAPI="GoogleReverseGeocoding"
-            GooglePlacesSearchQuery={{
-              rankby: "name",
-            }}
-            filterReverseGeocodingByTypes={[
-              "locality",
-              "administrative_area_level_3"
-            ]}
-            debounce={0}
-            renderLeftButton={()  => <Icon.Feather
-              name='search'
-              size={32}
-              style={styles.icon}
-              color={this.props.focused ? Colors.black90 : Colors.black50}
-            />}
-          />
+              onPress={(data, details = null) => {
+                console.log(data);
+                console.log(details);
+                setLocation(data.description);
+                _draggedValue = new Animated.Value(72)
+              }}
+              getDefaultValue={() => {
+                return ""; // text input default value
+              }}
+              query={{
+                key: 'AIzaSyA44NUmGHqIh8UQewJurulKlV3ZcLh5ETM',
+                language: "en", // language of the results
+                types: "(cities)" // default: 'geocode'
+              }}
+              styles={{
+                description: {
+                  height: 64,
+                  color: Colors.black90,
+                  fontSize: 20,
+                  fontFamily: 'plex-sans',
+                },
+                row: {
+                  height: 56
+                },
+                textInputContainer: {
+                  backgroundColor: 'white',
+                  borderTopWidth: 0,
+                  borderBottomWidth: 0,
+                  height: 40,
+                },
+                textInput: {
+                  marginLeft: 0,
+                  marginRight: 0,
+                  marginTop: 0,
+                  height: 40,
+                  backgroundColor: 'white',
+                  color: Colors.black90,
+                  fontSize: 20,
+                  fontFamily: 'plex-sans',
+                  paddingLeft: 0,
+                },
+              }}
+              textInputProps={{
+                onFocus: () => {
+                  console.log('FOCUS!!!!!!!!!!')
+                  setTimeout(() => {this._panel.show()}, 50);
+                },
+                onBlur: () => {
+                  console.log('BLUR!!!!!!!!')
+                  this._panel.hide()
+                }
+              }}
+              enablePoweredByContainer={false}
+              nearbyPlacesAPI="GoogleReverseGeocoding"
+              GooglePlacesSearchQuery={{
+                rankby: "name",
+              }}
+              filterReverseGeocodingByTypes={[
+                "locality",
+                "administrative_area_level_3"
+              ]}
+              debounce={0}
+              renderLeftButton={()  => <Icon.Ionicons
+                name='ios-search'
+                size={32}
+                style={styles.icon}
+                color={this.props.focused ? Colors.black90 : Colors.black50}
+              />}
+              renderRightButton={()  => <Icon.Ionicons
+                name='ios-navigate'
+                size={40}
+                style={styles.locIcon}
+                color={this.props.focused ? Colors.blue : Colors.blue}
+              />}
+            />
+          </View>
         </View>
-      </View>
-    </SlidingUpPanel>
+      </SlidingUpPanel>
     );
   }
 }
@@ -176,6 +181,13 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     marginBottom: 8,
     alignSelf: 'center'
+  },
+  locIcon: {
+    height: 40,
+    margin: 0,
+    width: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 

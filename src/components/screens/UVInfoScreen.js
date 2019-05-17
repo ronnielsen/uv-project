@@ -16,7 +16,7 @@ import { Colors, Layout } from '../../constants';
 
 class UVInfoScreen extends React.Component {
   static navigationOptions = {
-    header: <Header label="UV Index" icon="x-circle" iconColor={Colors.black50} />,
+    header: <Header label="UV Index" icon="x-circle" iconColor={Colors.black25} />,
     headerTransparent: true,
   };
 
@@ -58,13 +58,13 @@ class UVInfoScreen extends React.Component {
                 wear your
               </Text>
               <Text style={[{ color: this.getBackgroundColor() }, styles.items ]}>
-                hat,
+                hat
               </Text>
               <Text style={[{ color: this.getBackgroundColor() }, styles.items ]}>
-                 sunglasses,
+                sunglasses
               </Text>
               <Text style={[{ color: this.getBackgroundColor() }, styles.items ]}>
-                 and sunblock
+                sunblock
               </Text>
             </View>
             <View style={styles.labelRow}>
@@ -72,7 +72,7 @@ class UVInfoScreen extends React.Component {
                 avoid sunlight
               </Text>
               <Text style={[{ color: this.getBackgroundColor() }, styles.items ]}>
-                 between 10am-4pm
+                between 10am-4pm
               </Text>
             </View>
           </ScrollView>
@@ -85,10 +85,7 @@ class UVInfoScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-    height: Layout.window.height,
-    width: Layout.window.width,
-    backgroundColor: 'white',
+    flex: 1
   },
   scrollContainer: {
   },
@@ -117,7 +114,7 @@ const styles = StyleSheet.create({
       fontSize: 32,
       lineHeight: 40,
       fontFamily: 'plex-serif-bold'
-  }
+  },
 });
 
 const mapStateToProps = (state) => {

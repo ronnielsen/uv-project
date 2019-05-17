@@ -16,9 +16,9 @@ import { Colors, Layout } from '../../constants';
 
 class AirInfoScreen extends React.Component {
   static navigationOptions = {
-    header: <Header label="Air Quality" icon="x-circle" iconColor={Colors.black50} />,
+    header: <Header label="Air Quality" icon="x-circle" iconColor={Colors.black25} />,
     headerTransparent: true,
-  };
+  }
 
   getBackgroundColor = () => {
     let { air } = this.props.main;
@@ -60,10 +60,10 @@ class AirInfoScreen extends React.Component {
                 wear your
               </Text>
               <Text style={[{ color: this.getBackgroundColor()  }, styles.items ]}>
-                gas mask,
+                gas mask
               </Text>
               <Text style={[{ color: this.getBackgroundColor()  }, styles.items ]}>
-                 and sunglasses
+                sunglasses
               </Text>
             </View>
             <View style={styles.labelRow}>
@@ -71,10 +71,10 @@ class AirInfoScreen extends React.Component {
                 avoid
               </Text>
               <Text style={[{ color: this.getBackgroundColor()  }, styles.items ]}>
-                 going outside,
+                 going outside
               </Text>
               <Text style={[{ color: this.getBackgroundColor()  }, styles.items ]}>
-                 and leaving windows open
+                leaving windows open
               </Text>
             </View>
           </ScrollView>
@@ -87,10 +87,7 @@ class AirInfoScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-    height: Layout.window.height,
-    width: Layout.window.width,
-    backgroundColor: 'white',
+    flex: 1
   },
   scrollContainer: {
   },
@@ -102,6 +99,11 @@ const styles = StyleSheet.create({
     lineHeight: 192,
     height: 200,
     alignItems: 'center',
+    fontFamily: 'plex-serif-bold',
+  },
+  status: {
+    fontSize: 48,
+    lineHeight: 64,
     fontFamily: 'plex-serif-bold',
   },
   labelRow: {
@@ -118,6 +120,14 @@ const styles = StyleSheet.create({
       fontSize: 32,
       lineHeight: 40,
       fontFamily: 'plex-serif-bold'
+  },
+  fixedLabel: {
+    position: 'relative',
+    top: -35,
+    left: 24,
+    marginBottom: -28,
+    fontSize: 18,
+    fontFamily: 'plex-serif-bold',
   }
 });
 
