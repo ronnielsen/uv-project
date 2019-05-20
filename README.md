@@ -1,4 +1,5 @@
 # Ultraviolet
+Ultraviolet is a simple personal project with a focus on simplicity, typography, and easy of use.
 ![Ultraviolet Github Header](https://raw.githubusercontent.com/ronnielsen/Images/master/Ultraviolet/github.png)
 
 
