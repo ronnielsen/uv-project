@@ -1,14 +1,22 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View, Dimensions, Image } from 'react-native';
+import { Platform, StatusBar, StyleSheet, View, Image, Dimensions, KeyboardAvoidingView, Animated } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
+<<<<<<< HEAD
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/lib/integration/react';
+import { store, persistor } from './src/redux';
+import { Colors, Layout } from './src/constants';
+import AppNavigator from './src/components/navigators';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+=======
 import AppNavigator from './navigation/AppNavigator';
 import Colors from './constants/Colors';
 import Search from './components/Search';
 import Header from './components/Header';
 import { MonoText } from './components/StyledText';
+>>>>>>> ed1e301be795cb464dadd28a5ce5809f46ee1167
 
-const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
+const {height} = Dimensions.get('window')
 
 export default class App extends React.Component {
 
@@ -16,6 +24,20 @@ export default class App extends React.Component {
     isLoadingComplete: false,
     backgroundColor: Colors.green,
   };
+
+  componentWillUnmount() {
+    this._animatedValue.resetAnimation()
+  }
+
+  renderLoading() {
+    return (
+      <AppLoading
+        startAsync={this._loadResourcesAsync}
+        onError={this._handleLoadingError}
+        onFinish={this._handleFinishLoading}
+      />
+    );
+  }
 
   render() {
     let { backgroundColor } = this.state;
@@ -78,17 +100,15 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   page: {
-    flex: 1,
+    flex: 1
   },
   container: {
     flex: 1,
-    backgroundColor: Colors.green,
-    paddingBottom: 96
   },
   wave: {
     resizeMode: 'stretch',
-    height: height,
-    width: width,
+    height: Layout.window.height,
+    width: Layout.window.width,
     position: 'absolute',
     top: 0,
   }
