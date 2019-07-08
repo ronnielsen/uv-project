@@ -1,12 +1,20 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View, Image, Dimensions, KeyboardAvoidingView, Animated } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
+<<<<<<< HEAD
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import { store, persistor } from './src/redux';
 import { Colors, Layout } from './src/constants';
 import AppNavigator from './src/components/navigators';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+=======
+import AppNavigator from './navigation/AppNavigator';
+import Colors from './constants/Colors';
+import Search from './components/Search';
+import Header from './components/Header';
+import { MonoText } from './components/StyledText';
+>>>>>>> ed1e301be795cb464dadd28a5ce5809f46ee1167
 
 const {height} = Dimensions.get('window')
 
@@ -14,6 +22,7 @@ export default class App extends React.Component {
 
   state = {
     isLoadingComplete: false,
+    backgroundColor: Colors.green,
   };
 
   componentWillUnmount() {
@@ -31,21 +40,32 @@ export default class App extends React.Component {
   }
 
   render() {
-    let isLoading = !this.state.isLoadingComplete && !this.props.skipLoadingScreen;
-    return (
-      <Provider store={store}>
-        <PersistGate loading={this.renderLoading()} persistor={persistor}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" backgroundColor={'transparent'}/>}
-          {isLoading ? this.renderLoading() : (
-            <View style={styles.page}>
-              <View style={styles.container}>
-                <AppNavigator />
-              </View>
-            </View>
-          )}
-        </PersistGate>
-      </Provider>
-    );
+    let { backgroundColor } = this.state;
+    if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
+      return (
+        <AppLoading
+          startAsync={this._loadResourcesAsync}
+          onError={this._handleLoadingError}
+          onFinish={this._handleFinishLoading}
+        />
+      );
+    } else {
+      return (
+        <View style={styles.page}>
+          <View style={styles.container}>
+            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+            <Header />
+            <AppNavigator />
+            <Image
+              source={require('./assets/images/wave.png')}
+              style={styles.wave}
+              pointerEvents="none"
+            />
+          </View>
+          <Search />
+        </View>
+      );
+    }
   }
 
   _loadResourcesAsync = async () => {
